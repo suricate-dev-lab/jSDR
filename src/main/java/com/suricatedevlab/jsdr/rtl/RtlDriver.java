@@ -35,9 +35,9 @@ public final class RtlDriver implements Driver {
                 byte[] serialAsBytes = new byte[256];
                 NATIVE_LIBRARY.rtlsdr_get_device_usb_strings(0, manufacturerAsBytes, productAsBytes, serialAsBytes);
 
-                String manufacturer = new String(trim(manufacturerAsBytes), "UTF-8");
-                String product = new String(trim(productAsBytes), "UTF-8");
-                String serial = new String(trim(serialAsBytes), "UTF-8");
+                String manufacturer = new String(ByteUtils.trim(manufacturerAsBytes), "UTF-8");
+                String product = new String(ByteUtils.trim(productAsBytes), "UTF-8");
+                String serial = new String(ByteUtils.trim(serialAsBytes), "UTF-8");
                 result.add(new RtlDevice(i, NATIVE_LIBRARY, manufacturer, product, serial));
             } catch (UnsupportedEncodingException e) {
                 throw new SdrException("Failed to load device info at index "+i, e);
@@ -59,15 +59,5 @@ public final class RtlDriver implements Driver {
             }
         }
         return result;
-    }
-
-    private byte[] trim(byte[] bytes) {
-        int i = bytes.length - 1;
-        while (i >= 0 && bytes[i] == 0)
-        {
-            --i;
-        }
-
-        return Arrays.copyOf(bytes, i + 1);
     }
 }

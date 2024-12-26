@@ -6,19 +6,22 @@ public class Main {
         try(Device device = driver.getDevice(0)){
             String name = device.getName();
             TunerStatement statement = device.createTunerStatement();
+            //ADSB settings
             statement.setCenterFrequency(1090000000);
+            statement.setOffsetTuning(false);
+            statement.setDirectSampling(false);
+            statement.setAgcMode(true);
+            statement.setSampleRate(2000000);
             statement.setCorrectionFrequency(5);
-            //statement.setRate(2000000);
-            /*
-                        SampleSet sampleSet = statement.tune();
+            SampleSet sampleSet = statement.tune();
+            byte[] buffer = null;
             while(sampleSet.next()) {
-
+                buffer = sampleSet.getBytes();
+                System.out.println(buffer);
             }
-             */
         }
         catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Hello, World!");
     }
 }

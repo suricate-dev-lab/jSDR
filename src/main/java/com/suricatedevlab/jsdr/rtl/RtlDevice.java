@@ -61,13 +61,11 @@ class RtlDevice implements Device {
     }
 
     @Override
-    public TunerStatement createTunerStatement() {
+    public TunerStatement createTunerStatement() throws SdrException {
         int result = getNativeLibrary().rtlsdr_open(handle, getIndex());
-        long f = getNativeLibrary().rtlsdr_get_center_freq(handle.getValue());
-        //result = getNativeLibrary().rtlsdr_open(handle, getIndex());
-
-        //result = getNativeLibrary().rtlsdr_set_center_freq(handle.getValue(), 109000000);
-        //long f2 = getNativeLibrary().rtlsdr_get_center_freq(handle.getValue());
+        if (result < 0) {
+            throw new SdrException("Can not open device at index # "+getIndex());
+        }
         return new RtlTunerStatement(this);
     }
 
