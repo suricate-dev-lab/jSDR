@@ -1,5 +1,10 @@
 package com.suricatedevlab.jsdr;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Main {
     public static void main(String[] args) {
         Driver driver = DriverManager.getDriver("RTL-SDR");
@@ -14,7 +19,7 @@ public class Main {
             statement.setSampleRate(2000000);
             statement.setCorrectionFrequency(5);
             SampleSet sampleSet = statement.tune();
-
+/*
             SampleSet.ReadAsyncCallback callback = new SampleSet.ReadAsyncCallback() {
                 @Override
                 public void onReceive(byte[] data) {
@@ -22,7 +27,12 @@ public class Main {
                 }
             };
             sampleSet.readAsync(callback);
+ */
 
+            byte[] data;
+            while((data = sampleSet.readSync(1024)) != null) {
+                System.out.println("data receive "+ data);
+            }
         }
         catch (Exception e) {
             throw new RuntimeException(e);

@@ -6,5 +6,7 @@ public interface SampleSet extends AutoCloseable {
         void onReceive(byte[] data);
    }
 
+    byte[] readSync(int bufferSize);
+
    void readAsync(ReadAsyncCallback callback);
 }

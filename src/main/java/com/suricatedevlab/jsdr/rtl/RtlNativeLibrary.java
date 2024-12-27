@@ -19,7 +19,7 @@ interface RtlNativeLibrary extends Library {
     int rtlsdr_set_sample_rate(Pointer dev, int rate); // Set sample rate
     int rtlsdr_get_sample_rate(Pointer dev); // Get current sample rate
     void rtlsdr_reset_buffer(Pointer dev); // Reset buffer
-    //int rtlsdr_read_sync(Pointer dev, byte[] buf, int len, int timeout); // Read samples
+    int rtlsdr_read_sync(Pointer dev, byte[] buf, int len, PointerByReference n_read); // Read samples
     int rtlsdr_set_freq_correction(Pointer dev, int ppm); // Set frequency correction
     int rtlsdr_get_freq_correction(Pointer dev); // Get frequency correction
     int rtlsdr_set_center_freq(Pointer dev, long freq); // Set center frequency
