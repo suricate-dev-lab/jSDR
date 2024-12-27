@@ -6,18 +6,18 @@ import com.suricatedevlab.jsdr.SampleSet;
 
 class RtlSampleSet implements SampleSet {
 
-    private final RtlTunerStatement statement;
+    private final RtlTunerDefinition definition;
     private PointerByReference nRead;
 
-    public RtlSampleSet(RtlTunerStatement statement) {
-        this.statement = statement;
+    public RtlSampleSet(RtlTunerDefinition definition) {
+        this.definition = definition;
     }
 
     @Override
     public byte[] readSync(int bufferSize) {
-        statement.getDevice().getNativeLibrary().rtlsdr_reset_buffer(statement.getDevice().getHandle().getValue());
+        definition.getDevice().getNativeLibrary().rtlsdr_reset_buffer(definition.getDevice().getHandle().getValue());
         byte[] result = new byte[bufferSize];
-        int operationResult = statement.getDevice().getNativeLibrary().rtlsdr_read_sync(statement.getDevice().getHandle().getValue(),
+        int operationResult = definition.getDevice().getNativeLibrary().rtlsdr_read_sync(definition.getDevice().getHandle().getValue(),
                                 result, bufferSize, nRead);
         if (operationResult < 0) {
             return null;
@@ -36,7 +36,7 @@ class RtlSampleSet implements SampleSet {
             throw new IllegalArgumentException("Callback is null");
         }
 
-        statement.getDevice().getNativeLibrary().rtlsdr_reset_buffer(statement.getDevice().getHandle().getValue());
+        definition.getDevice().getNativeLibrary().rtlsdr_reset_buffer(definition.getDevice().getHandle().getValue());
 
         RtlNativeLibrary.RTLSDRReadAsyncCallback nativeCallback = new RtlNativeLibrary.RTLSDRReadAsyncCallback() {
             @Override
@@ -48,13 +48,13 @@ class RtlSampleSet implements SampleSet {
         };
 
         // Call the async read function
-        int result = statement.getDevice().getNativeLibrary().rtlsdr_read_async(statement.getDevice().getHandle().getValue(),
+        int result = definition.getDevice().getNativeLibrary().rtlsdr_read_async(definition.getDevice().getHandle().getValue(),
                 nativeCallback, null, 64, 64);
         System.out.println(result);
     }
 
     @Override
     public void close() throws Exception {
-        statement.close();
+        definition.close();
     }
 }

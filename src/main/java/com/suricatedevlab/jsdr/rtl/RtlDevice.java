@@ -1,12 +1,9 @@
 package com.suricatedevlab.jsdr.rtl;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import com.suricatedevlab.jsdr.Device;
 import com.suricatedevlab.jsdr.SdrException;
-import com.suricatedevlab.jsdr.TunerStatement;
-
-import java.util.Arrays;
+import com.suricatedevlab.jsdr.TunerDefinition;
 
 class RtlDevice implements Device {
 
@@ -61,12 +58,12 @@ class RtlDevice implements Device {
     }
 
     @Override
-    public TunerStatement createTunerStatement() throws SdrException {
+    public TunerDefinition getTunerDefinition() throws SdrException {
         int result = getNativeLibrary().rtlsdr_open(handle, getIndex());
         if (result < 0) {
             throw new SdrException("Can not open device at index # "+getIndex());
         }
-        return new RtlTunerStatement(this);
+        return new RtlTunerDefinition(this);
     }
 
     @Override

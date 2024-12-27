@@ -6,5 +6,5 @@ public interface Device extends AutoCloseable{
     String getManufacturer();
     String getProduct();
     String getSerial();
-    TunerStatement createTunerStatement() throws SdrException;
+    TunerDefinition getTunerDefinition() throws SdrException;
 }

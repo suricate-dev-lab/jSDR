@@ -1,13 +1,13 @@
 package com.suricatedevlab.jsdr.rtl;
 
 import com.suricatedevlab.jsdr.SampleSet;
-import com.suricatedevlab.jsdr.TunerStatement;
+import com.suricatedevlab.jsdr.TunerDefinition;
 
-class RtlTunerStatement implements TunerStatement {
+class RtlTunerDefinition implements TunerDefinition {
 
     private final RtlDevice device;
 
-    public RtlTunerStatement(RtlDevice device) {
+    public RtlTunerDefinition(RtlDevice device) {
         this.device = device;
     }
 

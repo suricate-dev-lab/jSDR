@@ -1,6 +1,6 @@
 package com.suricatedevlab.jsdr;
 
-public interface TunerStatement extends AutoCloseable {
+public interface TunerDefinition extends AutoCloseable {
     void setCorrectionFrequency(int correctionFrequency);
     void setCenterFrequency(long centerFrequency);
     void setGain(int gain);
