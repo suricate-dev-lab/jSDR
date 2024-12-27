@@ -18,14 +18,14 @@ interface RtlNativeLibrary extends Library {
     void rtlsdr_close(Pointer dev); // Close RTL-SDR device
     int rtlsdr_set_sample_rate(Pointer dev, int rate); // Set sample rate
     int rtlsdr_get_sample_rate(Pointer dev); // Get current sample rate
-    void rtlsdr_reset_buffer(PointerByReference dev); // Reset buffer
-    int rtlsdr_read_sync(Pointer dev, byte[] buf, int len, int timeout); // Read samples
+    void rtlsdr_reset_buffer(Pointer dev); // Reset buffer
+    //int rtlsdr_read_sync(Pointer dev, byte[] buf, int len, int timeout); // Read samples
     int rtlsdr_set_freq_correction(Pointer dev, int ppm); // Set frequency correction
     int rtlsdr_get_freq_correction(Pointer dev); // Get frequency correction
     int rtlsdr_set_center_freq(Pointer dev, long freq); // Set center frequency
     long rtlsdr_get_center_freq(Pointer dev); // Get center frequency
-    int rtlsdr_set_tuner_gain(Pointer dev, int gain); // Set tuner gain
-    int rtlsdr_get_tuner_gain(Pointer dev); // Get tuner gain
+    //int rtlsdr_set_tuner_gain(Pointer dev, int gain); // Set tuner gain
+    //int rtlsdr_get_tuner_gain(Pointer dev); // Get tuner gain
     int rtlsdr_set_agc_mode(Pointer dev, int enable); // Set AGC mode
     int rtlsdr_set_direct_sampling(Pointer dev, int mode); // Set direct sampling mode
     int rtlsdr_set_offset_tuning(Pointer dev, int enable); // Enable offset tuning

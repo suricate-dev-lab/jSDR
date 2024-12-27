@@ -5,41 +5,34 @@ import com.suricatedevlab.jsdr.SampleSet;
 
 class RtlSampleSet implements SampleSet {
 
-    private static final int BUFFER_SIZE = 64;
-
     private final RtlTunerStatement statement;
-    private byte[] buffer;
+
     public RtlSampleSet(RtlTunerStatement statement) {
         this.statement = statement;
-
     }
 
     @Override
-    public boolean next() {
-/*
+    public void readAsync(ReadAsyncCallback callback) {
 
-RtlNativeLibrary.RTLSDRReadAsyncCallback callback = new RtlNativeLibrary.RTLSDRReadAsyncCallback() {
+        if (callback == null) {
+            throw new IllegalArgumentException("Callback is null");
+        }
+
+        statement.getDevice().getNativeLibrary().rtlsdr_reset_buffer(statement.getDevice().getHandle().getValue());
+
+        RtlNativeLibrary.RTLSDRReadAsyncCallback nativeCallback = new RtlNativeLibrary.RTLSDRReadAsyncCallback() {
             @Override
             public void invoke(Pointer buf, int length, Pointer ctx) {
-                System.out.println(buf);
+
+                byte[] data = buf.getByteArray(0, length);
+                callback.onReceive(data);
             }
         };
 
         // Call the async read function
-        int result = statement.getDevice().getNativeLibrary().rtlsdr_read_async(statement.getDevice().getHandle().getValue(), callback, null, 10, 16384);
+        int result = statement.getDevice().getNativeLibrary().rtlsdr_read_async(statement.getDevice().getHandle().getValue(),
+                nativeCallback, null, 64, 64);
         System.out.println(result);
- */
-
-        byte[] buff = new byte[BUFFER_SIZE];
-        int result = statement.getDevice().getNativeLibrary().rtlsdr_read_sync(statement.getDevice().getHandle().getValue(),
-                buff, BUFFER_SIZE, 0);
-        buffer = ByteUtils.trim(buff);
-        return buffer.length > 0;
-    }
-
-    @Override
-    public byte[] getBytes() {
-        return buffer;
     }
 
     @Override

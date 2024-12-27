@@ -73,7 +73,6 @@ class RtlTunerStatement implements TunerStatement {
         }
     }
 
-
     @Override
     public SampleSet tune() {
         return new RtlSampleSet(this);
@@ -82,5 +81,17 @@ class RtlTunerStatement implements TunerStatement {
     @Override
     public void close() throws Exception {
         device.close();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("FREQUENCY CORRECTION = %d\n",
+                        device.getNativeLibrary().rtlsdr_get_freq_correction(device.getHandle().getValue())));
+        result.append(String.format("CENTER FREQUENCY = %d\n",
+                device.getNativeLibrary().rtlsdr_get_center_freq(device.getHandle().getValue())));
+        result.append(String.format("SAMPLE RATE = %d\n",
+                device.getNativeLibrary().rtlsdr_get_sample_rate(device.getHandle().getValue())));
+        return result.toString();
     }
 }
