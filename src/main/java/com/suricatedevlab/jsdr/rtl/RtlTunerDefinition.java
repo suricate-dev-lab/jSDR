@@ -96,6 +96,14 @@ class RtlTunerDefinition implements TunerDefinition {
     }
 
     @Override
+    public void setTunerIfGain(int stage, int gain) {
+        int result = device.getNativeLibrary().rtlsdr_set_tuner_if_gain(device.getHandle().getValue(), stage, gain);
+        if (result < 0) {
+            throw new IllegalArgumentException("Invalid tuner if gain");
+        }
+    }
+
+    @Override
     public int getSampleRate() {
         return device.getNativeLibrary().rtlsdr_get_sample_rate(device.getHandle().getValue());
     }

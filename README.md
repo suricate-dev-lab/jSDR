@@ -19,9 +19,10 @@ public class Main {
             System.out.println(device);
             TunerDefinition definition = device.getTunerDefinition();
             int[] supportedGains = definition.getSupportedTunerGains();
-            
+
             definition.setTunerGain(supportedGains[0]);
             definition.setTunerGainMode(true);
+            //definition.setTunerIfGain(0, 14);
             definition.setCenterFrequency(1090000000);
             definition.setDirectSampling(false);
             definition.setAgcMode(true);

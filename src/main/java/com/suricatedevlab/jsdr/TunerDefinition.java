@@ -16,6 +16,7 @@ public interface TunerDefinition extends AutoCloseable {
     void setTunerGainMode(boolean automatic);
     void setTunerGain(int gain);
     int getTunerGain();
+    void setTunerIfGain(int stage, int gain);
     int getSampleRate();
     void setSampleRate(int rate);
     void setAgcMode(boolean activate);
