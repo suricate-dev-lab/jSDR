@@ -15,8 +15,8 @@ class RtlTunerSample implements TunerSample {
 
     @Override
     public byte[] readSync(int bufferSize) {
-        definition.getDevice().getNativeLibrary().rtlsdr_reset_buffer(definition.getDevice().getHandle().getValue());
         byte[] result = new byte[bufferSize];
+        resetBuffer();
         int operationResult = definition.getDevice().getNativeLibrary().rtlsdr_read_sync(definition.getDevice().getHandle().getValue(),
                                 result, bufferSize, nRead);
         if (operationResult < 0) {
@@ -36,7 +36,7 @@ class RtlTunerSample implements TunerSample {
             throw new IllegalArgumentException("Callback is null");
         }
 
-        definition.getDevice().getNativeLibrary().rtlsdr_reset_buffer(definition.getDevice().getHandle().getValue());
+        resetBuffer();
 
         RtlNativeLibrary.RTLSDRReadAsyncCallback nativeCallback = new RtlNativeLibrary.RTLSDRReadAsyncCallback() {
             @Override
@@ -49,11 +49,18 @@ class RtlTunerSample implements TunerSample {
         // Call the async read function
         int result = definition.getDevice().getNativeLibrary().rtlsdr_read_async(definition.getDevice().getHandle().getValue(),
                 nativeCallback, null, 64, 64);
-        System.out.println(result);
+
+        if (result < 0) {
+            throw new IllegalStateException("Failed to start read async");
+        }
     }
 
     @Override
     public void close() throws Exception {
         definition.close();
+    }
+
+    private void resetBuffer() {
+        definition.getDevice().getNativeLibrary().rtlsdr_reset_buffer(definition.getDevice().getHandle().getValue());
     }
 }

@@ -76,4 +76,15 @@ class RtlDevice implements Device {
         }
     }
 
+    @Override
+    public String toString() {
+        return "RtlDevice{" +
+                "index=" + index +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", product='" + product + '\'' +
+                ", serial='" + serial + '\'' +
+                ", nativeLibrary=" + nativeLibrary +
+                ", handle=" + handle +
+                '}';
+    }
 }
