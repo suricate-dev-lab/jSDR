@@ -1,7 +1,10 @@
 package com.suricatedevlab.jsdr.rtl;
 
-import com.suricatedevlab.jsdr.SampleSet;
+import com.suricatedevlab.jsdr.TunerSample;
 import com.suricatedevlab.jsdr.TunerDefinition;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 class RtlTunerDefinition implements TunerDefinition {
 
@@ -16,11 +19,21 @@ class RtlTunerDefinition implements TunerDefinition {
     }
 
     @Override
+    public int getCorrectionFrequency() {
+        return device.getNativeLibrary().rtlsdr_get_freq_correction(device.getHandle().getValue());
+    }
+
+    @Override
     public void setCorrectionFrequency(int correctionFrequency) {
         int result = device.getNativeLibrary().rtlsdr_set_freq_correction(device.getHandle().getValue(), correctionFrequency);
         if (result < 0) {
             throw new IllegalArgumentException("Invalid correction frequency (PPM)");
         }
+    }
+
+    @Override
+    public long getCenterFrequency() {
+        return device.getNativeLibrary().rtlsdr_get_center_freq(device.getHandle().getValue());
     }
 
     @Override
@@ -32,13 +45,38 @@ class RtlTunerDefinition implements TunerDefinition {
     }
 
     @Override
-    public void setGain(int gain) {
-        /*
-                int result = device.getNativeLibrary().rtlsdr_set_tuner_gain(device.getHandle().getValue(), gain);
+    public int[] getSupportedTunerGains() {
+        int[] gains = new int[256];
+        int result = device.getNativeLibrary().rtlsdr_get_tuner_gains(device.getHandle().getValue(), gains);
         if (result < 0) {
-            throw new IllegalArgumentException("Invalid gain");
+            throw new IllegalStateException("Can not fetch supported tuner gains");
         }
-         */
+        return ByteUtils.trim(gains);
+    }
+
+    @Override
+    public void setTunerGain(int gain) {
+        int[] supportedTunerGains = getSupportedTunerGains();
+        if (Arrays.stream(supportedTunerGains).noneMatch(g -> g == gain)) {
+            String formattedTunerGains = getFormattedIntValues(supportedTunerGains);
+            throw new IllegalArgumentException(String
+                                        .format("Invalid tuner gain = %d - only tuner gains: %s are supported",
+                                                gain, formattedTunerGains));
+        }
+        int result = device.getNativeLibrary().rtlsdr_set_tuner_gain(device.getHandle().getValue(), gain);
+        if (result < 0) {
+            throw new IllegalArgumentException("Invalid tuner gain");
+        }
+    }
+
+    @Override
+    public int getTunerGain() {
+        return device.getNativeLibrary().rtlsdr_get_tuner_gain(device.getHandle().getValue());
+    }
+
+    @Override
+    public int getSampleRate() {
+        return device.getNativeLibrary().rtlsdr_get_sample_rate(device.getHandle().getValue());
     }
 
     @Override
@@ -74,8 +112,8 @@ class RtlTunerDefinition implements TunerDefinition {
     }
 
     @Override
-    public SampleSet tune() {
-        return new RtlSampleSet(this);
+    public TunerSample tune() {
+        return new RtlTunerSample(this);
     }
 
     @Override
@@ -86,12 +124,16 @@ class RtlTunerDefinition implements TunerDefinition {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("FREQUENCY CORRECTION = %d\n",
-                        device.getNativeLibrary().rtlsdr_get_freq_correction(device.getHandle().getValue())));
-        result.append(String.format("CENTER FREQUENCY = %d\n",
-                device.getNativeLibrary().rtlsdr_get_center_freq(device.getHandle().getValue())));
-        result.append(String.format("SAMPLE RATE = %d\n",
-                device.getNativeLibrary().rtlsdr_get_sample_rate(device.getHandle().getValue())));
+        result.append(String.format("FREQUENCY CORRECTION = %d\n", getCorrectionFrequency()));
+        result.append(String.format("CENTER FREQUENCY = %d\n", getCenterFrequency()));
+        result.append(String.format("SAMPLE RATE = %d\n", getSampleRate()));
+        result.append(String.format("SUPPORTED TUNER GAIN = %s\n", getFormattedIntValues(getSupportedTunerGains())));
         return result.toString();
+    }
+
+    private String getFormattedIntValues(int[] values) {
+        return Arrays.stream(values)
+                .mapToObj(String::valueOf) // Convert each int to String
+                .collect(Collectors.joining(", "));
     }
 }

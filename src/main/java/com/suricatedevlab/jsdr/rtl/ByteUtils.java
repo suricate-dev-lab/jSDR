@@ -14,4 +14,12 @@ final class ByteUtils {
         }
         return Arrays.copyOf(bytes, i + 1);
     }
+
+    public static int[] trim(int[] intArray) {
+        int i = intArray.length - 1;
+        while (i >= 0 && intArray[i] == 0) {
+            --i;
+        }
+        return Arrays.copyOf(intArray, i + 1);
+    }
 }

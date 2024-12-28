@@ -7,13 +7,14 @@ public class Main {
             String name = device.getName();
             TunerDefinition definition = device.getTunerDefinition();
             //ADSB settings
+            definition.setTunerGain(-10);
             definition.setCenterFrequency(1090000000);
             definition.setOffsetTuning(false);
             definition.setDirectSampling(true);
             definition.setAgcMode(true);
             definition.setSampleRate(2000000);
             definition.setCorrectionFrequency(5);
-            SampleSet sampleSet = definition.tune();
+            TunerSample tunerSample = definition.tune();
 /*
             Calling async
             SampleSet.ReadAsyncCallback callback = new SampleSet.ReadAsyncCallback() {
@@ -26,7 +27,7 @@ public class Main {
  */
 
             byte[] data;
-            while((data = sampleSet.readSync(1024)) != null) {
+            while((data = tunerSample.readSync(1024)) != null) {
                 System.out.println("data receive "+ data);
             }
         }

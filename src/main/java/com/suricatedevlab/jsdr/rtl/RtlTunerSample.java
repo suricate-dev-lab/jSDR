@@ -2,14 +2,14 @@ package com.suricatedevlab.jsdr.rtl;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
-import com.suricatedevlab.jsdr.SampleSet;
+import com.suricatedevlab.jsdr.TunerSample;
 
-class RtlSampleSet implements SampleSet {
+class RtlTunerSample implements TunerSample {
 
     private final RtlTunerDefinition definition;
     private PointerByReference nRead;
 
-    public RtlSampleSet(RtlTunerDefinition definition) {
+    public RtlTunerSample(RtlTunerDefinition definition) {
         this.definition = definition;
     }
 
@@ -41,7 +41,6 @@ class RtlSampleSet implements SampleSet {
         RtlNativeLibrary.RTLSDRReadAsyncCallback nativeCallback = new RtlNativeLibrary.RTLSDRReadAsyncCallback() {
             @Override
             public void invoke(Pointer buf, int length, Pointer ctx) {
-
                 byte[] data = buf.getByteArray(0, length);
                 callback.onReceive(data);
             }

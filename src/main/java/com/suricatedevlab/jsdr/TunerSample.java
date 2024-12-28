@@ -1,6 +1,6 @@
 package com.suricatedevlab.jsdr;
 
-public interface SampleSet extends AutoCloseable {
+public interface TunerSample extends AutoCloseable {
 
    interface ReadAsyncCallback {
         void onReceive(byte[] data);

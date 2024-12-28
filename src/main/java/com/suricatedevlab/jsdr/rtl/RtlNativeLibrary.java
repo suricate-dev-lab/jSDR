@@ -24,8 +24,9 @@ interface RtlNativeLibrary extends Library {
     int rtlsdr_get_freq_correction(Pointer dev); // Get frequency correction
     int rtlsdr_set_center_freq(Pointer dev, long freq); // Set center frequency
     long rtlsdr_get_center_freq(Pointer dev); // Get center frequency
-    //int rtlsdr_set_tuner_gain(Pointer dev, int gain); // Set tuner gain
-    //int rtlsdr_get_tuner_gain(Pointer dev); // Get tuner gain
+    int rtlsdr_get_tuner_gains(Pointer dev, int[] gains); // Get available tuner gains
+    int rtlsdr_set_tuner_gain(Pointer dev, int gain); // Set tuner gain
+    int rtlsdr_get_tuner_gain(Pointer dev); // Get tuner gain
     int rtlsdr_set_agc_mode(Pointer dev, int enable); // Set AGC mode
     int rtlsdr_set_direct_sampling(Pointer dev, int mode); // Set direct sampling mode
     int rtlsdr_set_offset_tuning(Pointer dev, int enable); // Enable offset tuning
