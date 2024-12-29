@@ -8,12 +8,13 @@ public class Main {
         Driver driver = DriverManager.getDriver("RTL-SDR");
         try(Device device = driver.getDevice(0)){
             System.out.println(device);
+
             TunerDefinition definition = device.getTunerDefinition();
             int[] supportedGains = definition.getSupportedTunerGains();
 
             definition.setTunerGain(supportedGains[0]);
             definition.setTunerGainMode(true);
-            //definition.setTunerIfGain(0, 14);
+            //definition.setTunerIfGain(4, 12);
             definition.setCenterFrequency(1090000000);
             definition.setDirectSampling(false);
             definition.setAgcMode(true);
@@ -44,7 +45,7 @@ public class Main {
 
             byte[] data;
             while((data = tunerSample.readSync(1024)) != null) {
-                System.out.println("data receive "+ data);
+                //System.out.println("data receive "+ data);
             }
         }
         catch (Exception e) {
