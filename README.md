@@ -72,7 +72,6 @@ public class Main {
 - Add support for Windows
 - Add support for Linux
 - Add Unit tests
-- Add documentation
 
 ## Acknowledgements
 
