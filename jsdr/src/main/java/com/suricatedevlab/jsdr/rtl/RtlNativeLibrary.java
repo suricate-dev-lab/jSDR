@@ -25,14 +25,11 @@ interface RtlNativeLibrary extends Library {
     static RtlNativeLibrary getInstance() {
         try {
             File tempFile = extractLibrary(RtlNativeLibrary.class.getClassLoader(), "librtlsdr.2.0.1.dylib");
-            // Load the library using JNA
             System.setProperty("jna.library.path", tempFile.getParent());
             return Native.load(tempFile.getName(), RtlNativeLibrary.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        //return Native.load("librtlsdr.2.0.1.dylib", RtlNativeLibrary.class);
     }
 
     private static File extractLibrary(ClassLoader classLoader, String resourcePath) throws IOException {

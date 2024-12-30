@@ -35,13 +35,3 @@ sourceSets {
     }
 }
 
-/*
-sourceSets {
-    main {
-        resources {
-            srcDir 'src/main/resources/libs'
-            include 'librtlsdr.2.0.1.dylib' // or 'mylib.dll' for Windows
-        }
-    }
-}
- */

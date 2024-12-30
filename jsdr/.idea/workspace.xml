@@ -5,33 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09217de7-1eb7-44f6-9c5e-bdb77d5c8e99" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/intellij-javadocs-4.0.1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/../gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/Device.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/Driver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/DriverManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/SdrException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/TunerDefinition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/TunerSample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/rtl/ByteUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/rtl/RtlDevice.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/rtl/RtlDriver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/rtl/RtlNativeLibrary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/rtl/RtlTunerDefinition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/com/suricatedevlab/jsdr/rtl/RtlTunerSample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/META-INF/services/com.suricatedevlab.jsdr.Driver" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/librtlsdr.2.0.1.dylib" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../examples/jsdr-basic-example/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../examples/jsdr-basic-example/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/suricatedevlab/jsdr/rtl/RtlNativeLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/suricatedevlab/jsdr/rtl/RtlNativeLibrary.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,20 +68,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Jsdr.executor": "Run",
-    "Gradle.Build jsdr.executor": "Run",
-    "Gradle.jsdr [:com.suricatedevlab.jsdr.Main.main()].executor": "Debug",
-    "Gradle.jsdr [build].executor": "Run",
-    "Gradle.jsdr [clean].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/loic/esp/workspace/java/jsdr/jsdr"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Jsdr.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build jsdr.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jsdr [:com.suricatedevlab.jsdr.Main.main()].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.jsdr [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jsdr [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/loic/esp/workspace/java/jsdr/jsdr&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Jsdr">
     <configuration name="Jsdr" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
