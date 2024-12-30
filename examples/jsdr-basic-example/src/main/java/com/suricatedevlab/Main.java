@@ -1,4 +1,6 @@
-package com.suricatedevlab.jsdr;
+package com.suricatedevlab;
+
+import com.suricatedevlab.jsdr.*;
 
 import java.util.HashMap;
 import java.util.Map;

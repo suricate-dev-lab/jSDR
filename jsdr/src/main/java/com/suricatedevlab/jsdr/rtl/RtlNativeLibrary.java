@@ -1,11 +1,16 @@
 package com.suricatedevlab.jsdr.rtl;
 
-import com.sun.jna.Callback;
-import com.sun.jna.Library;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
+import com.sun.jna.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 interface RtlNativeLibrary extends Library {
 
@@ -18,7 +23,29 @@ interface RtlNativeLibrary extends Library {
     public static final int RTLSDR_TUNER_TYPE_R828D = 6;
 
     static RtlNativeLibrary getInstance() {
-        return Native.load("librtlsdr.2.0.1.dylib", RtlNativeLibrary.class);
+        try {
+            File tempFile = extractLibrary(RtlNativeLibrary.class.getClassLoader(), "librtlsdr.2.0.1.dylib");
+            // Load the library using JNA
+            System.setProperty("jna.library.path", tempFile.getParent());
+            return Native.load(tempFile.getName(), RtlNativeLibrary.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //return Native.load("librtlsdr.2.0.1.dylib", RtlNativeLibrary.class);
+    }
+
+    private static File extractLibrary(ClassLoader classLoader, String resourcePath) throws IOException {
+        try (InputStream in = classLoader.getResourceAsStream(resourcePath)) {
+            if (in == null) throw new FileNotFoundException("Library not found: " + resourcePath);
+
+            // Create a temporary file and copy the library into it
+            Path tempFile = Files.createTempFile("librtlsdr.2.0.1", ".dylib");
+            tempFile.toFile().deleteOnExit();
+            Files.copy(in, tempFile, StandardCopyOption.REPLACE_EXISTING);
+
+            return tempFile.toFile();
+        }
     }
 
     int rtlsdr_open(PointerByReference dev, int index); // Open RTL-SDR device

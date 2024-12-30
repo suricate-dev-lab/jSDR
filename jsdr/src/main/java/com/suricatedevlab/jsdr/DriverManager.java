@@ -40,7 +40,7 @@ public class DriverManager {
      *
      * @return an enumeration of all available SDR drivers
      */
-    static Enumeration<Driver> getDrivers() {
+    public static Enumeration<Driver> getDrivers() {
         List<Driver> result = new ArrayList<>();
         ServiceLoader<Driver> loader = ServiceLoader.load(Driver.class);
         Iterator<Driver> iterator = loader.iterator();
@@ -60,7 +60,7 @@ public class DriverManager {
      * @param identifier the unique identifier of the desired SDR driver
      * @return the driver that accepts the specified identifier, or {@code null} if no matching driver is found
      */
-    static Driver getDriver(String identifier) {
+    public static Driver getDriver(String identifier) {
         if (identifier == null || identifier.isBlank()) {
             return null;
         }

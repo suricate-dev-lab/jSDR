@@ -1,0 +1,3 @@
+rootProject.name = 'jsdr-basic-example'
+
+includeBuild '../../../jsdr'
