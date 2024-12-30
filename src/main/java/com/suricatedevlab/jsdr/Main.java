@@ -17,7 +17,7 @@ public class Main {
             //definition.setTunerIfGain(4, 12);
             definition.setCenterFrequency(1090000000);
             definition.setDirectSampling(false);
-            definition.setAgcMode(true);
+            definition.setAutomaticGainControl(true);
             definition.setSampleRate(2000000);
             definition.setCorrectionFrequency(5);
             definition.setBandwidth(2000000); //2Mhz
@@ -45,7 +45,7 @@ public class Main {
 
             byte[] data;
             while((data = tunerSample.readSync(1024)) != null) {
-                //System.out.println("data receive "+ data);
+                System.out.println("data receive "+ data);
             }
         }
         catch (Exception e) {

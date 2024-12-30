@@ -2,6 +2,7 @@ package com.suricatedevlab.jsdr.rtl;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
+import com.suricatedevlab.jsdr.SdrException;
 import com.suricatedevlab.jsdr.TunerSample;
 
 class RtlTunerSample implements TunerSample {
@@ -14,13 +15,16 @@ class RtlTunerSample implements TunerSample {
     }
 
     @Override
-    public byte[] readSync(int bufferSize) {
+    public byte[] readSync(int bufferSize) throws SdrException {
+        if (bufferSize <= 0) {
+            throw new IllegalArgumentException("buffer size <= 0");
+        }
         byte[] result = new byte[bufferSize];
         resetBuffer();
         int operationResult = definition.getDevice().getNativeLibrary().rtlsdr_read_sync(definition.getDevice().getHandle().getValue(),
                                 result, bufferSize, nRead);
         if (operationResult < 0) {
-            return null;
+            throw new SdrException("Failed to perform read sync");
         }
         result = ByteUtils.trim(result);
         if (result.length == 0) {
@@ -30,7 +34,7 @@ class RtlTunerSample implements TunerSample {
     }
 
     @Override
-    public void readAsync(ReadAsyncCallback callback) {
+    public void readAsync(ReadAsyncCallback callback) throws SdrException {
 
         if (callback == null) {
             throw new IllegalArgumentException("Callback is null");
@@ -51,7 +55,7 @@ class RtlTunerSample implements TunerSample {
                 nativeCallback, null, 64, 64);
 
         if (result < 0) {
-            throw new IllegalStateException("Failed to start read async");
+            throw new SdrException("Failed to perform read async");
         }
     }
 

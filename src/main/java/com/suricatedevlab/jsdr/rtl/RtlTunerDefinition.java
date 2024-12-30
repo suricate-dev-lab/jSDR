@@ -117,7 +117,7 @@ class RtlTunerDefinition implements TunerDefinition {
     }
 
     @Override
-    public void setAgcMode(boolean activate) {
+    public void setAutomaticGainControl(boolean activate) {
         int result = device.getNativeLibrary().rtlsdr_set_agc_mode(device.getHandle().getValue(), activate ? 1 : 0);
         if (result < 0) {
             throw new IllegalArgumentException("Failed to set in AGC mode");
@@ -200,9 +200,9 @@ class RtlTunerDefinition implements TunerDefinition {
 
             RtlSdrTunerType tunerType = RtlSdrTunerType.fromDisplayName(getTunerType());
 
-            if (!RtlSdrTunerType.R820T.equals(tunerType)) {
-                throw new UnsupportedOperationException(String.format("Tuner dithering is only supported by  %s device type",
-                        RtlSdrTunerType.R820T));
+            if (!tunerType.supportsDithering()) {
+                throw new UnsupportedOperationException(String.format("Tuner dithering is only supported by device type %s",
+                        tunerType.getDisplayName()));
             }
 
             Object value = properties.get(PROPERTY_TUNER_DITHERING);
@@ -246,19 +246,25 @@ class RtlTunerDefinition implements TunerDefinition {
 
     public enum RtlSdrTunerType {
 
-        E4000(RtlNativeLibrary.RTLSDR_TUNER_TYPE_E4000, "RTLSDR_TUNER_E4000"),
-        FC0012(RtlNativeLibrary.RTLSDR_TUNER_TYPE_FC0012, "RTLSDR_TUNER_FC0012"),
-        FC0013(RtlNativeLibrary.RTLSDR_TUNER_TYPE_FC0013, "RTLSDR_TUNER_FC0013"),
-        FC2580(RtlNativeLibrary.RTLSDR_TUNER_TYPE_FC2580, "RTLSDR_TUNER_FC2580"),
-        R820T(RtlNativeLibrary.RTLSDR_TUNER_TYPE_R820T, "RTLSDR_TUNER_R820T"),
-        R828D(RtlNativeLibrary.RTLSDR_TUNER_TYPE_R828D, "RTLSDR_TUNER_R828D"),
-        UNKNOWN(RtlNativeLibrary.RTLSDR_TUNER_TYPE_UNKNOWN, "RTLSDR_TUNER_UNKNOWN");
+        E4000(RtlNativeLibrary.RTLSDR_TUNER_TYPE_E4000, "RTLSDR_TUNER_E4000", false),
+        FC0012(RtlNativeLibrary.RTLSDR_TUNER_TYPE_FC0012, "RTLSDR_TUNER_FC0012",  false),
+        FC0013(RtlNativeLibrary.RTLSDR_TUNER_TYPE_FC0013, "RTLSDR_TUNER_FC0013", false),
+        FC2580(RtlNativeLibrary.RTLSDR_TUNER_TYPE_FC2580, "RTLSDR_TUNER_FC2580", false),
+        R820T(RtlNativeLibrary.RTLSDR_TUNER_TYPE_R820T, "RTLSDR_TUNER_R820T", true),
+        R828D(RtlNativeLibrary.RTLSDR_TUNER_TYPE_R828D, "RTLSDR_TUNER_R828D", false),
+        UNKNOWN(RtlNativeLibrary.RTLSDR_TUNER_TYPE_UNKNOWN, "RTLSDR_TUNER_UNKNOWN", false);
 
         private final int code;
         private final String displayName;
-        RtlSdrTunerType(int code, String displayName) {
+        private final boolean supportsDithering;
+        RtlSdrTunerType(int code, String displayName, boolean supportsDithering) {
             this.code = code;
             this.displayName = displayName;
+            this.supportsDithering = supportsDithering; //supportsDithering
+        }
+
+        public boolean supportsDithering() {
+            return supportsDithering;
         }
 
         public int getCode() {
