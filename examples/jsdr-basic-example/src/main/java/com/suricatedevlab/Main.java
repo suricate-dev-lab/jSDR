@@ -34,16 +34,6 @@ public class Main {
             definition.setExtraProperties(properties);
 
             TunerSample tunerSample = definition.tune();
-/*
-            Calling async
-            SampleSet.ReadAsyncCallback callback = new SampleSet.ReadAsyncCallback() {
-                @Override
-                public void onReceive(byte[] data) {
-                    System.out.println("data receive "+ data);
-                }
-            };
-            sampleSet.readAsync(callback);
- */
 
             byte[] data;
             while((data = tunerSample.readSync(1024)) != null) {

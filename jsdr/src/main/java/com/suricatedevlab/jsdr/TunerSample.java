@@ -47,10 +47,14 @@ public interface TunerSample extends AutoCloseable {
      * method will be triggered once the data is ready.</p>
      *
      * @param callback the callback to be invoked when the data is available
-     * @throws IllegalArgumentException if the callback is {@code null}
+     * @param bufferNumber the number of the buffer where the data will be stored.
+     *        This parameter is used to specify which buffer to use for the data read operation.
+     * @param bufferSize the size of the buffer (in bytes) that will be used to store the data.
+     *        The buffer should be large enough to hold the expected amount of data.
+     * @throws IllegalArgumentException if the callback is {@code null}, or if the bufferSize is less than or equal to 0
      * @throws SdrException if there is an error during the reading process (e.g., hardware failure, timeout)
      */
-    void readAsync(ReadAsyncCallback callback) throws SdrException;
+    void readAsync(ReadAsyncCallback callback, int bufferNumber, int bufferSize) throws SdrException;
 
     /**
      * Reads data synchronously from the tuner.

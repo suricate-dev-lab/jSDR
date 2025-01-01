@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf0e92e-bd7a-465d-bb31-cc6e29d78b60" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/jsdr-basic-example/src/main/java/com/suricatedevlab/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/examples/jsdr-basic-example/src/main/java/com/suricatedevlab/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsdr/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/jsdr/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsdr/src/main/java/com/suricatedevlab/jsdr/TunerSample.java" beforeDir="false" afterPath="$PROJECT_DIR$/jsdr/src/main/java/com/suricatedevlab/jsdr/TunerSample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsdr/src/main/java/com/suricatedevlab/jsdr/rtl/RtlTunerSample.java" beforeDir="false" afterPath="$PROJECT_DIR$/jsdr/src/main/java/com/suricatedevlab/jsdr/rtl/RtlTunerSample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +105,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/loic/esp/workspace/java/jsdr",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",

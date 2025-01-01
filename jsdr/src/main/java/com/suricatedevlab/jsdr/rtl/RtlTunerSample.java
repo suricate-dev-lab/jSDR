@@ -34,7 +34,7 @@ class RtlTunerSample implements TunerSample {
     }
 
     @Override
-    public void readAsync(ReadAsyncCallback callback) throws SdrException {
+    public void readAsync(ReadAsyncCallback callback, int bufferNumber, int bufferSize) throws SdrException {
 
         if (callback == null) {
             throw new IllegalArgumentException("Callback is null");
@@ -52,7 +52,7 @@ class RtlTunerSample implements TunerSample {
 
         // Call the async read function
         int result = definition.getDevice().getNativeLibrary().rtlsdr_read_async(definition.getDevice().getHandle().getValue(),
-                nativeCallback, null, 64, 64);
+                nativeCallback, null, bufferNumber, bufferSize);
 
         if (result < 0) {
             throw new SdrException("Failed to perform read async");
